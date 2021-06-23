@@ -1,13 +1,13 @@
-import { LOGIN, LOGOUT } from './types';
-import { SERVER_IP } from '../../private'
+import { LOGIN, LOGOUT }       	from './types';
+import { SERVER_IP }			from '../../private';
 
 const finishLogin = (email, token) => {
     return {
-        type: LOGIN,
-        payload: {
-            email,
-            token,
-        }
+        	type: LOGIN,
+        	payload: {
+			email,
+			token,
+		}
     }
 }
 
