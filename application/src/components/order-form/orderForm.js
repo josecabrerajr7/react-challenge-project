@@ -1,10 +1,10 @@
-import React, { Component } 				from 'react';
+import React, { Component } 			from 'react';
 import { Template } 					from '../../components';
-import { connect } 					from 'react-redux';
+import { connect } 						from 'react-redux';
 import { SERVER_IP } 					from '../../private';
-import 							'./orderForm.css';
+import 									'./orderForm.css';
 
-const ADD_ORDER_URL = `${SERVER_IP}/api/add-order`
+const ADD_ORDER_URL 					= `${SERVER_IP}/api/add-order`
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
@@ -32,12 +32,13 @@ class OrderForm extends Component {
 		console.log(this.state);
 	
 		if (this.state.order_item === "") return;
+		
 		fetch(ADD_ORDER_URL, {
 			method: 'POST',
 			body: JSON.stringify({
 				order_item: this.state.order_item,
 				quantity: this.state.quantity,
-				ordered_by: this.props.auth.email || 'Unknown!',
+				ordered_by: this.props.auth.token || 'Unknown!',
 			}),
 			headers: {
 				'Content-Type': 'application/json'
@@ -72,8 +73,8 @@ class OrderForm extends Component {
 							<option value="6">6</option>
 						</select>
 						<button type="button" 
-							  className="order-btn" 
-							  onClick={(event) => this.submitOrder(event)}>Order It!</button>
+                                className="order-btn" 
+                                onClick={(event) => this.submitOrder(event)}>Order It!</button>
 					</form>
 				</div>
 			</Template>

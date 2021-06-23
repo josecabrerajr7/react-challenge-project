@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import './Dasboard.css';
+import React, { Component } 	from 'react';
+import { connect } 				from 'react-redux';
+import { Link } 				from 'react-router-dom';
+import 							'./Dasboard.css';
 
 const mapStateToProps = state => ({
-  temp: state.temp
+	temp: state.temp
 });
 
 class Dashboard extends Component {

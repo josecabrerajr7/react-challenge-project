@@ -9,7 +9,6 @@ const mapStateToProps = state => ({
 
 class Main extends Component {
 	render() {
-	console.log('props', this.props);
 		return (
 			<div className="main-body">
 				<h1>Bruce's Diner Ordering Application</h1>

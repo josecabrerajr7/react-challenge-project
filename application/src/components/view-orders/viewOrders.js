@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
-import { Template } from '../../components';
-import { SERVER_IP } from '../../private';
-import './viewOrders.css';
+import React, { Component }			from 'react';
+import { Template } 				from '../../components';
+import { SERVER_IP } 				from '../../private';
+import 								'./viewOrders.css';
 
 class ViewOrders extends Component {
-    state = {
-        orders: []
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            orders: []
+        }
     }
 
     componentDidMount() {
@@ -13,6 +18,7 @@ class ViewOrders extends Component {
             .then(response => response.json())
             .then(response => {
                 if(response.success) {
+                    debugger
                     this.setState({ orders: response.orders });
                 } else {
                     console.log('Error getting orders');
