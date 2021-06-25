@@ -29,7 +29,7 @@ app.use(morgan('dev'));
 
 // bodyparser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // CORS
 // This allows client applications from other domains use the API Server
