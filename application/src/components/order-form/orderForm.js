@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Template } from '../../components';
-import { connect } from 'react-redux';
-import { SERVER_IP } from '../../private';
-import './orderForm.css';
+import React, { Component }         from 'react';
+import { Template }                 from '../../components';
+import { connect }                  from 'react-redux';
+import { SERVER_IP }                from '../../private';
+import                              './orderForm.css';
 
-const ADD_ORDER_URL = `${SERVER_IP}/api/add-order`
+const ADD_ORDER_URL                 = `${SERVER_IP}/api/add-order`;
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
@@ -19,31 +19,34 @@ class OrderForm extends Component {
         }
     }
 
+    // set the item the user selected in the menu
     menuItemChosen(event) {
         this.setState({ item: event.target.value });
     }
 
+    // set the quantity the user selected in the menu
     menuQuantityChosen(event) {
         this.setState({ quantity: event.target.value });
     }
 
+    // when the user clicks on submit button this function will post there order
     submitOrder(event) {
         event.preventDefault();
-        if (this.state.order_item === "") return;
-        fetch(ADD_ORDER_URL, {
-            method: 'POST',
-            body: JSON.stringify({
-                order_item: this.state.order_item,
-                quantity: this.state.quantity,
-                ordered_by: this.props.auth.email || 'Unknown!',
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(response => console.log("Success", JSON.stringify(response)))
-        .catch(error => console.error(error));
+            if (this.state.order_item === "") return;
+                fetch(ADD_ORDER_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        order_item: this.state.order_item,
+                        quantity: this.state.quantity,
+                        ordered_by: this.props.auth.email || 'Unknown!'
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(response => console.log("Success", JSON.stringify(response)))
+                .catch(error => console.error(error));
     }
 
     render() {
@@ -51,19 +54,20 @@ class OrderForm extends Component {
             <Template>
                 <div className="form-wrapper">
                     <form>
-                        <label className="form-label">I'd like to order...</label><br />
-                        <select 
-                            value={this.state.order_item} 
-                            onChange={(event) => this.menuItemChosen(event)}
-                            className="menu-select"
-                        >
-                            <option value="" defaultValue disabled hidden>Lunch menu</option>
-                            <option value="Soup of the Day">Soup of the Day</option>
-                            <option value="Linguini With White Wine Sauce">Linguini With White Wine Sauce</option>
-                            <option value="Eggplant and Mushroom Panini">Eggplant and Mushroom Panini</option>
-                            <option value="Chili Con Carne">Chili Con Carne</option>
+                        <label className="form-label">I'd like to order...</label>
+                        <br />
+                        {/* the options can be stored in the database as (strings) and return instead of having it in the all in the render */}
+                        <select value={this.state.order_item} 
+                                onChange={(event) => this.menuItemChosen(event)}
+                                className="menu-select">
+                                    <option value="" defaultValue disabled hidden>Lunch menu</option>
+                                    <option value="Soup of the Day">Soup of the Day</option>
+                                    <option value="Linguini With White Wine Sauce">Linguini With White Wine Sauce</option>
+                                    <option value="Eggplant and Mushroom Panini">Eggplant and Mushroom Panini</option>
+                                    <option value="Chili Con Carne">Chili Con Carne</option>
                         </select><br />
                         <label className="qty-label">Qty:</label>
+                        {/* value should be stored in database as an integer */}
                         <select value={this.state.quantity} onChange={(event) => this.menuQuantityChosen(event)}>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -72,7 +76,9 @@ class OrderForm extends Component {
                             <option value="5">5</option>
                             <option value="6">6</option>
                         </select>
-                        <button type="button" className="order-btn" onClick={(event) => this.submitOrder(event)}>Order It!</button>
+                        <button type="button" 
+                                className="order-btn" 
+                                onClick={(event) => this.submitOrder(event)}>Order It!</button>
                     </form>
                 </div>
             </Template>
