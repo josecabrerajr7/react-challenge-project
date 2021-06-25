@@ -1,9 +1,8 @@
-const INITIAL_STATE = { test: '' };
+const INITIAL_STATE             = { test: '' };
 
 export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-
+    switch (action.type) {
+        default:
+            return state;
+    }
 }
