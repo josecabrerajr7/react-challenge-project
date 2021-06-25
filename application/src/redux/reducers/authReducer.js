@@ -1,6 +1,6 @@
-import { LOGIN, LOGOUT } from '../actions/types'
+import { LOGIN, LOGOUT }    from '../actions/types'
 
-const INITIAL_STATE = { email: null, token: null };
+const INITIAL_STATE         = { email: null, token: null };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
