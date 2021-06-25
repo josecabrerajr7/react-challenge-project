@@ -1,6 +1,6 @@
-import React, { Component } 		from 'react';
-import { connect } 					from 'react-redux';
-import 								'./Dasboard.css';
+import React, { Component }			from 'react';
+import { connect }					from 'react-redux';
+import								'./Dasboard.css';
 
 const mapStateToProps = state => ({
 	temp: state.temp
