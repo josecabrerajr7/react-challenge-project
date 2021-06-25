@@ -1,35 +1,33 @@
 version: "3.3"
 
 services:
-  client:
-    build: './application'
-    ports:
-      - "3000:3000"
-    networks:
-      - backend
-    depends_on:
-      - server
-    volumes:
-    - ./application:/home/node/application
-    - /home/node/application/node_modules
-
-  server:
+    client:
+        build: './application'
+        ports:
+            - "3000:3000"
+        networks:
+            - backend
+        depends_on:
+            - server
+        volumes:
+            - ./application:/home/node/application
+            - /home/node/application/node_modules
+server:
     build: './server'
-    ports: 
-    - "4000:4000"
+        ports: 
+            - "4000:4000"
     networks:
-    - backend
+        - backend
     depends_on:
-    - database
+        - database
     volumes:
-    - ./server:/home/node/server
-    - /home/node/server/node_modules
-  database:
-    image: "mongo"
+        - ./server:/home/node/server
+        - /home/node/server/node_modules
+    database:
+        image: "mongo"
+        networks:
+            - backend
+        ports:
+        - "27017:27017"
     networks:
-    - backend
-    ports:
-    - "27017:27017"
-
-networks:
-  backend:
+        backend:
