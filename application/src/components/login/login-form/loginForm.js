@@ -22,7 +22,6 @@ class LoginForm extends React.Component {
 	
 
 	login(e) {
-        // testing only
 		e.preventDefault();
 		this.props.commenceLogin(this.state.email, this.state.password);
 		this.props.onLogin();
