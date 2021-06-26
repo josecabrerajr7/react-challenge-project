@@ -1,5 +1,5 @@
 import React                            from 'react';
-import { getOrders }                    from '../api/order-services';
+import { getOrders, deleteOrder }       from '../api/order-services';
 import { Template }                     from '../../components';
 import                                  './viewOrders.css';
 
@@ -12,11 +12,27 @@ class ViewOrders extends React.Component {
         }
    }
 
-    // getOrders before page loads. Using it's own service page will keep the code much clean. Using axios because it already converts the data into json.
     componentDidMount() {
-       getOrders().then(res => {
-           this.setState({ orders: res.data.orders });
-       });
+       this.getAllOrders();
+    }
+
+    // function to get All Orders
+    getAllOrders() {
+        getOrders().then(res => {
+            this.setState({ orders: res.data.orders });
+        });
+    }
+
+    // delete order and return all order in the view
+    deleteOrder(e, order) {
+        e.preventDefault();
+        if (confirm('Do you want to delete this order?')) {
+            deleteOrder(order).then(res => {
+                this.getAllOrders();
+            });
+        } else {
+            alert("Order was not delete");
+        }
     }
 
     render() {

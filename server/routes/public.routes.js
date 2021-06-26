@@ -55,7 +55,8 @@ router.post('/add-order', async (req, res) => {
 });
 
 // edit and order but it should not be a post. Need to switch to ".put"
-router.post('/edit-order', async (req, res) => {
+router.put('/edit-order/:id', async (req, res) => {
+    
     // expects id
     try {
         if (!req.body.id) {
@@ -89,22 +90,22 @@ router.post('/edit-order', async (req, res) => {
 });
 
 // delete an order and it needs to be ".delete" not post
-router.post('/delete-order', async (req, res) => {
+router.delete('/delete-order/:id', async (req, res) => {
     try {
-        // expects id
-        if (!req.body.id) {
+        // expects id from params!
+        if (!req.params.id) {
                 res.status(400).json({ success: false, error: 'No id supplied' });
             return;
         }
 
         // make sure an order exists in the database with that id
-        const targetOrder = await Order.findOne({ _id: req.body.id });
+        const targetOrder = await Order.findOne({ _id: req.params.id });
             if (!targetOrder) {
                     res.status(400).json({ success: false, error: 'No order exists with that id!' });
                 return;
             }
 
-        const deleteResponse = await Order.deleteOne({ _id: req.body.id });
+        const deleteResponse = await Order.deleteOne({ _id: req.params.id });
             if (!deleteResponse || !deleteResponse.n) {
                     res.status(400).json({ success: false, error: 'Unable to delete from database' });
                 return;
