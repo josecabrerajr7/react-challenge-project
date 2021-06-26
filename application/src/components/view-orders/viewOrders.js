@@ -1,24 +1,22 @@
-import React, { Component }             from 'react';
+import React                            from 'react';
+import { getOrders }                    from '../api/order-services';
 import { Template }                     from '../../components';
-import { SERVER_IP }                    from '../../private';
 import                                  './viewOrders.css';
 
-class ViewOrders extends Component {
-    state = {
-        orders: []
-    }
+class ViewOrders extends React.Component {
+   constructor(props) {
+       super(props);
 
-    // 
+        this.state = {
+            orders: []
+        }
+   }
+
+    // getOrders before page loads. Using it's own service page will keep the code much clean. Using axios because it already converts the data into json.
     componentDidMount() {
-        fetch(`${SERVER_IP}/api/current-orders`)
-            .then(response => response.json())
-            .then(response => {
-                if(response.success) {
-                    this.setState({ orders: response.orders });
-                } else {
-                    console.log('Error getting orders');
-                }
-            });
+       getOrders().then(res => {
+           this.setState({ orders: res.data.orders });
+       });
     }
 
     render() {
@@ -39,7 +37,8 @@ class ViewOrders extends Component {
                                 </div>
                                 <div className="col-md-4 view-order-right-col">
                                     <button className="btn btn-success">Edit</button>
-                                    <button className="btn btn-danger">Delete</button>
+                                    <button className="btn btn-danger"
+                                            onClick={ e => this.deleteOrder(e, order) }>Delete</button>
                                 </div>
                             </div>
                         );
