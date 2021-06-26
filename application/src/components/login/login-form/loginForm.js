@@ -1,4 +1,4 @@
-import React, { Component }       	from 'react';
+import React       	                from 'react';
 import { connect }                	from 'react-redux'; 
 import { loginUser }            	from '../../../redux/actions/authActions'
 
@@ -8,11 +8,18 @@ const mapActionsToProps = dispatch => ({
 	}
 })
 
-class LoginForm extends Component {
-	state = {
-		email: "",
-		password: "",
-	}
+class LoginForm extends React.Component {
+
+    // constructor has to be called when initialize state and binding methods, also have to use React.Component
+    constructor(props) {
+        super(props);
+        // setting state and creating the object values
+        this.state = {
+            email: "",
+            password: "",
+        }
+    }
+	
 
 	login(e) {
 		e.preventDefault();
