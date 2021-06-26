@@ -26,7 +26,7 @@ class ViewOrders extends React.Component {
     // delete order and return all order in the view
     deleteOrder(e, order) {
         e.preventDefault();
-        if (confirm('Do you want to delete this order?')) {
+        if (window.confirm('Do you want to delete this order?')) {
             deleteOrder(order).then(res => {
                 this.getAllOrders();
             });
