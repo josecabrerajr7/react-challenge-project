@@ -19,9 +19,9 @@ class OrderForm extends Component {
         }
     }
 
-    // set the item the user selected in the menu
+    // set the item the user selected in the menu and property should be order_item not item
     menuItemChosen(event) {
-        this.setState({ item: event.target.value });
+        this.setState({ order_item: event.target.value });
     }
 
     // set the quantity the user selected in the menu
@@ -32,6 +32,7 @@ class OrderForm extends Component {
     // when the user clicks on submit button this function will post there order
     submitOrder(event) {
         event.preventDefault();
+        console.log(this.state.order_item);
             if (this.state.order_item === "") return;
                 fetch(ADD_ORDER_URL, {
                     method: 'POST',
