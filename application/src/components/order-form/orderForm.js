@@ -19,7 +19,7 @@ class OrderForm extends Component {
         }
     }
 
-    // set the item the user selected in the menu and property should be order_item not item
+    // set the item the user selected in the menu and parameter should be order_item not item
     menuItemChosen(event) {
         this.setState({ order_item: event.target.value });
     }
