@@ -1,4 +1,4 @@
-import React, { Component }         from 'react';
+import React                        from 'react';
 import { Template }                 from '../../components';
 import { connect }                  from 'react-redux';
 import { SERVER_IP }                from '../../private';
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 })
 
-class OrderForm extends Component {
+class OrderForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
