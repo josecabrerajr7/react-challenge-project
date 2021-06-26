@@ -12,7 +12,7 @@ require('dotenv').config();
 
 // DATABASE SETUP
 // connect to db
-mongoose.connect(process.env.MONGODATABASE);
+mongoose.connect(process.env.MONGODATABASE, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
 
 // display message on connect
 mongoose.connection.on('connected', () => {
