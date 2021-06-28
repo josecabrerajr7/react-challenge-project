@@ -59,20 +59,20 @@ router.put('/edit-order/:id', async (req, res) => {
     
     // expects id
     try {
-        if (!req.body.id) {
+        if (!req.params.id) {
                 res.status(400).json({ success: false, error: 'No id supplied'});
             return;
         }
 
         // make sure an order exists in the database with that id
-        const targetOrder = await Order.findOne({ _id: req.body.id });
+        const targetOrder = await Order.findOne({ _id: req.params.id });
             if (!targetOrder) {
                     res.status(400).json({ success: false, error: 'No order exists with that id!' });
                 return;
         }
 
         const updateResponse = await Order.updateOne({
-            _id: req.body.id
+            _id: req.params.id
         }, {
             ordered_by: req.body.ordered_by,
             order_item: req.body.order_item,
