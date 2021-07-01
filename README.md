@@ -55,6 +55,6 @@ The following backend endpoints can be queried via Postman for testing purposes:
 - Login (POST) - `(server addr)/api/login` (Expects name/password in request body)
 - Current Orders (GET) - `(server addr)/api/current-orders`
 - Add Order (POST) - `(server addr)/api/add-order` (Expects ordered_by, quantity, menu_item in request body)
-- Delete Order (POST) - `(server addr)/api/delete-order` (Expects id in request body)
-- Edit Order (POST) - `(server addr)/api/edit-order` (Expects id in request body. Will look for ordered_by, quantity, menu_item.)
+- Delete Order (DELETE) - `(server addr)/api/delete-order/:id` (Expects id in request params)
+- Edit Order (PUT) - `(server addr)/api/edit-order/:id` (Expects id in request param. Will look for only id.)
 - Flush Orders (DELETE) - `(server addr)/api/delete-all` (This deletes all current orders in the DB)

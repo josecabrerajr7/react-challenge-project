@@ -10,9 +10,8 @@ const port              = 4000;
 
 require('dotenv').config();
 
-// DATABASE SETUP
-// connect to db
-mongoose.connect(process.env.MONGODATABASE, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
+// connects to db and wanted to avoid deprecation Warnings. Read more: https://mongoosejs.com/docs/deprecations.html
+mongoose.connect(process.env.MONGODATABASE, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false });
 
 // display message on connect
 mongoose.connection.on('connected', () => {
@@ -29,7 +28,7 @@ app.use(morgan('dev'));
 
 // bodyparser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // CORS
 // This allows client applications from other domains use the API Server
@@ -39,7 +38,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Expose-Headers', 'Authorization, refresh');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, refresh');
     res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
-  
+    res.setHeader("Content-Type", "application/json"); // setHeader to allow application/json
     next();
 });
 
