@@ -4,7 +4,7 @@ import { connect }                  from 'react-redux';
 import { SERVER_IP }                from '../../private';
 import                              './orderForm.css';
 
-const ADD_ORDER_URL                 = `${SERVER_IP}/api/add-order`;
+const ADD_ORDER_URL                 = `${SERVER_IP}/api/orders`;
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
@@ -32,7 +32,6 @@ class OrderForm extends React.Component {
     // when the user clicks on submit button this function will post there order
     submitOrder(event) {
         event.preventDefault();
-        console.log(this.state.order_item);
             if (this.state.order_item === "") return;
                 fetch(ADD_ORDER_URL, {
                     method: 'POST',
