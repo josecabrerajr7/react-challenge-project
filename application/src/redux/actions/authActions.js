@@ -32,10 +32,12 @@ export const loginUser = (email, password) => {
     };
 }
 
-// logthe user out
+// log the user out
 export const logoutUser = () => {
-    return {
-        type: LOGOUT,
-        payload: null,
+    return (dispatch) => {
+        dispatch({
+            type: LOGOUT,
+            payload: null
+        })
     }
 }
